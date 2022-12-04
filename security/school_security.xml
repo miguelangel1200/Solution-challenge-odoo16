@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+        <!-- Definir una categoria -->
+        <record model="ir.module.category" id="school.module_category_school">
+            <field name="name">School</field>
+            <field name="description">Ayuda a gestionar la escuela</field>
+            <field name="sequence">100</field>
+        </record>
+
+        <record model="res.groups" id="group_school_profesor">
+            <field name="name">Profesor</field>
+            <field name="category_id" ref="school.module_category_school" />
+            <field name="comment">Profesores que gestionan notas </field>
+        </record>
+
+        <record model="res.groups" id="group_school_admin">
+            <field name="name">Administracion</field>
+            <field name="category_id" ref="school.module_category_school" />
+            <field name="comment">Administradores que visualizan y editan</field>
+            <!-- Los miembros también realizan lo de profesor -->
+            <field name="implied_ids" eval="[(4, ref('group_school_profesor'))]" />
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]" />
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,146 @@
+<odoo>
+  <data>
+    <!-- Vistas de Subject -->
+    <record model="ir.ui.view" id="school.subject_list_view">
+      <field name="name">school.subject.view.tree</field>
+      <field name="model">school.subject</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="credits"/>
+          <field name="max_students"/>
+          <field name="active"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="school.subject_form_view">
+      <field name="name">school.subject.view.form</field>
+      <field name="model">school.subject</field>
+      <field name="arch" type="xml">
+        <form string="Formulario de Materia">
+          <sheet>
+            <separator string="Información de la Materia"/>
+              <group>
+                  <group>
+                      <field name="name" placeholder="Nombre de la Materia" />
+                      <field name="credits" placeholder="Creditos" />
+                      <field name="max_students" placeholder="Cantidad de alumnos" />
+                      <field name="active"/>
+                  </group>
+              </group>
+              <group>
+                  <field name="student_ids"/>
+                  <field name="teacher_id"/>
+              </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    
+
+    <!-- Vistas para Estudiantes -->
+    <record model="ir.ui.view" id="school.student_list_view">
+      <field name="name">school.student.view.tree</field>
+      <field name="model">school.student</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="birth_date"/>
+          <field name="age"/>
+          <field name="final_exam_grade"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="school.student_form_view">
+      <field name="name">school.student.view.form</field>
+      <field name="model">school.student</field>
+      <field name="arch" type="xml">
+        <form string="Formulario de Estudiante">
+          <sheet>
+            <separator string="Información del Estudiante"/>
+              <group>
+                  <group>
+                      <field name="name" placeholder="Nombre de Estudiante" />
+                      <field name="birth_date" placeholder="Cumpleaños" />
+                      <field name="age" placeholder="Edad" />
+                      <field name="final_exam_grade" placeholder="Nota final" />
+                  </group>
+              </group>
+              <group>
+                  <field name="subject_ids" string="Materia"/>
+              </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vistas para Profesores -->
+    <record model="ir.ui.view" id="school.teacher_list_view">
+      <field name="name">school.teacher.view.tree</field>
+      <field name="model">school.teacher</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="profile"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="school.teacher_form_view">
+      <field name="name">school.teacher.view.form</field>
+      <field name="model">school.teacher</field>
+      <field name="arch" type="xml">
+        <form string="Formulario de Profesor">
+          <sheet>
+            <separator string="Información del Profesor"/>
+              <group>
+                  <group>
+                      <field name="name" placeholder="Nombre de Profesor" />
+                  </group>
+                  <group>
+                      <field name="profile" placeholder="Perfil" />
+                  </group>
+              </group>
+              <group>
+                  <field name="subject_ids" string="Materia"/>
+              </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Definiendo el menú -->
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="school.subject_action_window">
+      <field name="name">Materia</field>
+      <field name="res_model">school.subject</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="school.student_action_window">
+      <field name="name">Estudiantes</field>
+      <field name="res_model">school.student</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="school.teacher_action_window">
+      <field name="name">Profesor</field>
+      <field name="res_model">school.teacher</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Top menu item -->
+    <menuitem name="School" id="school.menu_root"/>
+    <!-- menu categories -->
+    <menuitem name="Materia" id="school.subject_menu" parent="school.menu_root" action="school.subject_action_window"/>
+    <menuitem name="Estudiantes" id="school.student_menu" parent="school.menu_root" action="school.student_action_window"/>
+    <menuitem name="Profesores" id="school.teacher_menu" parent="school.menu_root" action="school.teacher_action_window"/>
+
+
+  </data>
+</odoo>
